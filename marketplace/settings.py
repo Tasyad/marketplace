@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_7*%!su&9zzh^^^qvm=)r^2wu57qi4lorty1vz5uf7-agy+539'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['heroku run python manage.py migrate', 'localhost', '127.0.0.1']

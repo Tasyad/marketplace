@@ -19,6 +19,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+
     username = serializers.CharField(
         write_only=True,
         required=True
@@ -26,6 +27,10 @@ class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    is_vendor = serializers.ChoiceField(choices=((True, 'Vendor'),
+                                        (False, 'Customer'))
+
     )
     password = serializers.CharField(
         write_only=True,
@@ -39,7 +44,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['email', 'username', 'first_name', 'second_name', 'phone', 'password', 'password2']
+        fields = ['email', 'username', 'first_name', 'second_name', 'phone', 'password', 'password2', 'is_vendor']
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:

@@ -20,7 +20,7 @@ class RegisterApiView(APIView):
         if serializers.is_valid():
             user = User.objects.create(
                 username=request.data['username'],
-                email=request.data['email']
+                email=request.data['email'],
             )
             user.set_password(request.data['password'])
             user.save()
@@ -29,6 +29,7 @@ class RegisterApiView(APIView):
                 first_name=request.data['first_name'],
                 second_name=request.data['second_name'],
                 phone=request.data['phone'],
+                is_vendor=request.data['is_vendor']
             )
             account.save()
             cart = Cart.objects.create(
@@ -37,6 +38,7 @@ class RegisterApiView(APIView):
             cart.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # class AccountListApiView(APIView):

@@ -1,5 +1,7 @@
 from django.http import Http404
 from rest_framework.parsers import JSONParser
+
+from account.permissions import IsVendor
 from .models import Product, Category
 from .serializers import ProductSerializer, CartSerializer, UpdateSerializer
 from rest_framework import status, permissions, generics
@@ -42,7 +44,7 @@ class CartCreateAPIView(APIView):
 
 
 class GetCartAPIView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsVendor]
     parser_classes = [JSONParser]
 
     def get(self, request, id):
